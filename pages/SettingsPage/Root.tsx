@@ -5,7 +5,6 @@ import FontAwesome5 from "@react-native-vector-icons/fontawesome5";
 import MaterialIcons from "@react-native-vector-icons/material-icons";
 import Octicons from "@react-native-vector-icons/octicons";
 import * as Application from "expo-application";
-import * as Updates from "expo-updates";
 import React, { useContext } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { supportsAlternateIcons } from "../../utils/appIcons";
@@ -60,12 +59,6 @@ export default function Root() {
             icon: <Feather name="activity" size={22} color={theme.text} />,
             text: "Data Use",
             onPress: () => pushURL("hydra://settings/dataUse"),
-          },
-          {
-            key: "privacy",
-            icon: <Feather name="lock" size={22} color={theme.text} />,
-            text: "Privacy",
-            onPress: () => pushURL("hydra://settings/privacy"),
           },
           {
             key: "advanced",
@@ -247,9 +240,6 @@ export default function Root() {
           {Application.applicationName}: {Application.nativeApplicationVersion}
           {"\n"}
           Build #{Application.nativeBuildVersion}
-          {"\n"}
-          Update Group:{" "}
-          {(Updates.manifest as any)?.metadata?.updateGroup ?? "development"}
           {"\n"}
         </Text>
       </View>

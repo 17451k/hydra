@@ -1,4 +1,3 @@
-import * as Sentry from "@sentry/react-native";
 import { createContext, useEffect, useRef, useState } from "react";
 
 import { UserAuth } from "../api/Authentication";
@@ -69,11 +68,10 @@ export function AccountProvider({ children }: React.PropsWithChildren) {
       UserAuth.isLoggedIn = true;
       KeyStore.set("currentUser", user.userName);
       setCurrentUser(user);
-      Sentry.setUser({ username: user.userName });
       await RedditCookies.saveSessionCookies(user.userName);
       await addUser(user.userName);
       // Best effort: a failure here shouldn't log the user out.
-      applyDefaultAccountSettings().catch((e) => Sentry.captureException(e));
+      applyDefaultAccountSettings().catch((e) => console.warn(e));
       return true;
     } catch (e) {
       if (attempt !== sessionAttempt.current) return null;
@@ -127,7 +125,6 @@ export function AccountProvider({ children }: React.PropsWithChildren) {
     await swapSessionCookies(() => RedditCookies.clearSessionCookies());
     if (forget) KeyStore.remove("currentUser");
     setCurrentUser(null);
-    Sentry.setUser(null);
     resetGqlSessionState();
   };
 

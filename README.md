@@ -1,3 +1,6 @@
+> **FOSS fork** — a build of [Hydra](https://github.com/dmilin1/hydra) for devices without Google Play Services. Only the base (free) features are available: Hydra Pro, push notifications, OTA updates, and crash reporting are not included.
+> See [documentation/FOSS_BUILD.md](documentation/FOSS_BUILD.md) for details.
+
 <div align="center">
     <img src="./assets/images/icon.png" alt="Hydra" width="100" style="border-radius: 22px; overflow: hidden;"/> <br/>
     <h1>Hydra</h1> <br/>

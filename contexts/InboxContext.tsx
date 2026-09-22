@@ -1,4 +1,3 @@
-import * as Notifications from "expo-notifications";
 import {
   createContext,
   Dispatch,
@@ -68,10 +67,6 @@ export function InboxProvider({ children }: React.PropsWithChildren) {
       clearInterval(interval);
     };
   }, [currentUser]);
-
-  useEffect(() => {
-    Notifications.setBadgeCountAsync(inboxCount);
-  }, [inboxCount]);
 
   return (
     <InboxContext.Provider

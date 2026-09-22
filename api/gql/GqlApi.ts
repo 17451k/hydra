@@ -1,4 +1,3 @@
-import * as Sentry from "@sentry/react-native";
 
 import { USER_AGENT } from "../UserAgent";
 import safeFetch from "../../utils/safeFetch";
@@ -130,10 +129,7 @@ export async function gql(
     throw new GqlError(operation.name, res.status, json.errors ?? []);
   }
   if (json.errors?.length) {
-    Sentry.addBreadcrumb({
-      message: `${operation.name} returned partial data`,
-      data: { errors: json.errors },
-    });
+    console.warn(`${operation.name} returned partial data`, json.errors);
   }
   return json.data;
 }

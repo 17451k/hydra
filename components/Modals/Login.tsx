@@ -1,6 +1,13 @@
 import Feather from "@react-native-vector-icons/feather";
 import React, { useContext, useRef, useEffect, useState } from "react";
-import { StyleSheet, View, Text, ActivityIndicator, Alert } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Text,
+  ActivityIndicator,
+  Alert,
+  Platform,
+} from "react-native";
 import { Touchable } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -223,7 +230,9 @@ export default function Login() {
                   handleLoginFinished();
                 }
               }}
-              userAgent={USER_AGENT}
+              // Reddit rejects the spoofed iOS user agent on Android WebView
+              // ("disable any extensions or try a different browser").
+              userAgent={Platform.OS === "ios" ? USER_AGENT : undefined}
               injectedJavaScript={INJECTED_JAVASCRIPT}
               injectedJavaScriptBeforeContentLoaded={REDDIT_APPLE_POPUP_SHIM}
               // Injected js doesn't run unless you pass a function here.

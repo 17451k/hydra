@@ -1,5 +1,4 @@
 import CookieManager from "@preeternal/react-native-cookie-manager";
-import * as Sentry from "@sentry/react-native";
 
 import { USER_AGENT } from "../UserAgent";
 import safeFetch, {
@@ -127,9 +126,7 @@ async function requestNewToken(): Promise<string> {
   }
   if (!isForSession(token, session) && !reportedAccountMismatch) {
     reportedAccountMismatch = true;
-    Sentry.addBreadcrumb({
-      message: "New token_v2 doesn't match reddit_session's account",
-    });
+    console.warn("New token_v2 doesn't match reddit_session's account");
   }
   lastIssued = { session, token, at: Date.now() };
   return token;
