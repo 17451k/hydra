@@ -4,7 +4,6 @@ import "@expo/metro-runtime";
 import "expo-dev-client";
 
 import { ActionSheetProvider } from "@expo/react-native-action-sheet";
-import * as Sentry from "@sentry/react-native";
 import { useMigrations } from "drizzle-orm/expo-sqlite/migrator";
 import { registerRootComponent } from "expo";
 import { useFonts } from "expo-font";
@@ -22,17 +21,13 @@ import { AccountProvider } from "../contexts/AccountContext";
 import { InboxProvider } from "../contexts/InboxContext";
 import { MediaViewerProvider } from "../contexts/MediaViewerContext";
 import { ModalProvider } from "../contexts/ModalProvider";
-import NavigationProvider, {
-  sentryNavigationIntegration,
-} from "../contexts/NavigationContext";
+import NavigationProvider from "../contexts/NavigationContext";
 import { SettingsProvider } from "../contexts/SettingsContexts";
 import { SubredditProvider } from "../contexts/SubredditContext";
 import { SubscriptionsProvider } from "../contexts/SubscriptionsContext";
 import db from "../db";
 import { doDBMaintenance } from "../db/functions/Maintenance";
 import migrations from "../drizzle/migrations";
-import { ERROR_REPORTING_STORAGE_KEY } from "../pages/SettingsPage/Privacy";
-import KeyStore from "../utils/KeyStore";
 import { TabScrollProvider } from "../contexts/TabScrollContext";
 import { StartupModalProvider } from "../contexts/StartupModalContext";
 import { ToastProvider } from "../contexts/ToastProvider";
@@ -45,24 +40,6 @@ LogBox.ignoreLogs([
   "Constants.manifest has been deprecated in favor of Constants.expoConfig.",
   `Constants.platform.ios.model has been deprecated in favor of expo-device's Device.modelName property. This API will be removed in SDK 45.`,
 ]);
-
-// Default to true if not set
-const reportingAllowed =
-  KeyStore.getBoolean(ERROR_REPORTING_STORAGE_KEY) !== false;
-
-Sentry.init({
-  dsn: "https://0a53bc725058aa44bf7aa771f5bcda05@o4508377723174912.ingest.us.sentry.io/4508377726582784",
-  debug: false,
-  enabled: !__DEV__ && reportingAllowed,
-  tracesSampleRate: 0.1,
-  profilesSampleRate: 0.1,
-  integrations: [sentryNavigationIntegration],
-  enableTombstone: true,
-
-  // Disable app hang tracking because it's bugged when asking for permissions
-  // https://stackoverflow.com/a/79085057
-  enableAppHangTracking: false,
-});
 
 SplashScreen.preventAutoHideAsync();
 
@@ -150,7 +127,7 @@ function RootLayout() {
   );
 }
 
-const App = Sentry.wrap(RootLayout);
+const App = RootLayout;
 
 export default App;
 

@@ -11,7 +11,6 @@ import Legal from "./General/Legal";
 import OpenInHydra from "./General/OpenInHydra";
 import ExternalLinks from "./General/ExternalLinks";
 import ModifyLinks from "./General/ModifyLinks";
-import Privacy from "./Privacy";
 import Root from "./Root";
 import Sorting from "./General/Sorting";
 import Startup from "./General/Startup";
@@ -83,7 +82,6 @@ export default function SettingsPage({
 
         {relativePath === "settings/dataUse" && <DataUse />}
         {relativePath === "settings/stats" && <Stats />}
-        {relativePath === "settings/privacy" && <Privacy />}
         {relativePath === "settings/advanced" && <Advanced />}
         {relativePath === "settings/hydraPro" && <HydraPro />}
         {relativePath === "settings/tipJar" && <TipJar />}

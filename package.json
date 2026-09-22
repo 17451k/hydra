@@ -36,7 +36,6 @@
     "@react-navigation/bottom-tabs": "^7.18.14",
     "@react-navigation/native": "^7.3.14",
     "@react-navigation/native-stack": "^7.18.6",
-    "@sentry/react-native": "~8.20.0",
     "@shopify/flash-list": "^2.3.1",
     "babel-plugin-inline-import": "^3.0.0",
     "drizzle-orm": "^0.45.2",
@@ -56,7 +55,6 @@
     "expo-media-library": "~57.0.3",
     "expo-modules-core": "^57.0.8",
     "expo-network": "~57.0.1",
-    "expo-notifications": "~57.0.7",
     "expo-screen-orientation": "~57.0.1",
     "expo-secure-store": "~57.0.1",
     "expo-sharing": "~57.0.7",
@@ -64,7 +62,6 @@
     "expo-sqlite": "~57.0.1",
     "expo-status-bar": "~57.0.1",
     "expo-system-ui": "~57.0.1",
-    "expo-updates": "~57.0.10",
     "expo-video": "~57.0.2",
     "expo-web-browser": "~57.0.2",
     "html-entities": "^2.6.0",
@@ -75,7 +72,6 @@
     "react-native-gesture-handler": "3.1.0",
     "react-native-mmkv": "^4.3.2",
     "react-native-nitro-modules": "^0.36.1",
-    "react-native-purchases": "^10.4.4",
     "react-native-reanimated": "4.5.0",
     "react-native-safe-area-context": "~5.7.0",
     "react-native-screens": "~4.26.0",
@@ -105,7 +101,6 @@
   "allowScripts": {
     "esbuild@0.18.20": true,
     "unrs-resolver@1.7.2": true,
-    "@sentry/cli@3.6.1": true,
     "esbuild@0.25.12": true,
     "esbuild@0.28.1": true
   }

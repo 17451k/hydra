@@ -1,4 +1,3 @@
-import * as Sentry from "@sentry/react-native";
 import { createContext, useEffect, useState } from "react";
 
 import { UserAuth } from "../api/Authentication";
@@ -51,7 +50,6 @@ export function AccountProvider({ children }: React.PropsWithChildren) {
       UserAuth.modhash = user.modhash;
       KeyStore.set("currentUser", user.userName);
       setCurrentUser(user);
-      Sentry.setUser({ username: user.userName });
       await RedditCookies.saveSessionCookies(user.userName);
       await fixIncompatibleAccountSettings();
       await addUser(user.userName);
@@ -83,7 +81,6 @@ export function AccountProvider({ children }: React.PropsWithChildren) {
     await RedditCookies.getLoggedOutCookies();
     KeyStore.remove("currentUser");
     setCurrentUser(null);
-    Sentry.setUser(null);
     UserAuth.modhash = undefined;
   };
 
