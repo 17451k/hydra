@@ -1,7 +1,6 @@
 import { APP_ICON_PLUGIN_ICONS } from "./constants/appIcons";
 import packageJson from "./package.json";
 
-const projectId = "7e403d7f-7747-4daa-a3c9-4acb948f7a60";
 const IS_DEV = process.env.APP_VARIANT === "development";
 
 const REDDIT_DEEP_LINK_HOSTS = [
@@ -13,12 +12,9 @@ const REDDIT_DEEP_LINK_HOSTS = [
 
 module.exports = {
   expo: {
-    name: "Hydra",
+    name: "Hydra FOSS",
     slug: "hydra",
     version: packageJson.version,
-    runtimeVersion: {
-      policy: "appVersion",
-    },
     icon: "./assets/images/icon.png",
     scheme: "hydra",
     userInterfaceStyle: "automatic",
@@ -33,7 +29,10 @@ module.exports = {
       },
     },
     android: {
-      package: "com.dmilin.hydra",
+      package: "com.shchepetkov.hydra",
+      // Android refuses updates unless versionCode increases. CI sets
+      // GITHUB_RUN_NUMBER, which only ever grows; local builds get 1.
+      versionCode: Number(process.env.GITHUB_RUN_NUMBER ?? 1),
       adaptiveIcon: {
         foregroundImage: "./assets/images/icon_android.png",
         backgroundColor: "#000000",
@@ -53,12 +52,6 @@ module.exports = {
       bundler: "metro",
       favicon: "./assets/images/favicon.png",
     },
-    extra: {
-      eas: {
-        projectId,
-      },
-    },
-    owner: "dmilin",
     plugins: [
       [
         "expo-media-library",
@@ -67,7 +60,6 @@ module.exports = {
             "Allow $(PRODUCT_NAME) to save photos and videos to your library.",
         },
       ],
-      "@sentry/react-native/expo",
       [
         "expo-image-picker",
         {
@@ -75,7 +67,6 @@ module.exports = {
             "$(PRODUCT_NAME) accesses your photos to upload images.",
         },
       ],
-      "expo-notifications",
       [
         "./plugins/withAppIcons",
         {
@@ -120,9 +111,5 @@ module.exports = {
       "expo-web-browser",
       "expo-status-bar",
     ],
-    updates: {
-      url: `https://u.expo.dev/${projectId}`,
-      fallbackToCacheTimeout: 5000,
-    },
   },
 };
